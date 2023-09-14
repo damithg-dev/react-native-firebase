@@ -55,8 +55,8 @@ const nativeEvents = [
 ];
 
 class FirebaseFirestoreModule extends FirebaseModule {
-  constructor(app, config) {
-    super(app, config);
+  constructor(app, config, databaseID) {
+    super(app, config, null, databaseID);
     this._referencePath = new FirestorePath();
     this._transactionHandler = new FirestoreTransactionHandler(this);
 

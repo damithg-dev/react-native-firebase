@@ -21,8 +21,9 @@ import SharedEventEmitter from './SharedEventEmitter';
 let firebaseJson = null;
 
 export default class FirebaseModule {
-  constructor(app, config, customUrlOrRegion) {
+  constructor(app, config, customUrlOrRegion, database) {
     this._app = app;
+    this._database = database;
     this._nativeModule = null;
     this._customUrlOrRegion = customUrlOrRegion;
     this._config = Object.assign({}, config);

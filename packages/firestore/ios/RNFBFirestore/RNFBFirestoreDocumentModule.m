@@ -63,14 +63,15 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(documentOnSnapshot
                   : (FIRApp *)firebaseApp
+                  : (NSString *) database
                   : (NSString *)path
                   : (nonnull NSNumber *)listenerId
                   : (NSDictionary *)listenerOptions) {
   if (documentSnapshotListeners[listenerId]) {
     return;
   }
-
-  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp];
+  
+  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp database:database ];
   FIRDocumentReference *documentReference = [RNFBFirestoreCommon getDocumentForFirestore:firestore
                                                                                     path:path];
 
