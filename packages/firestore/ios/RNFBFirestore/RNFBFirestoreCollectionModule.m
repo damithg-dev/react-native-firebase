@@ -63,6 +63,7 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(namedQueryOnSnapshot
                   : (FIRApp *)firebaseApp
+                  : (NSString *)database
                   : (NSString *)name
                   : (NSString *)type
                   : (NSArray *)filters
@@ -74,7 +75,7 @@ RCT_EXPORT_METHOD(namedQueryOnSnapshot
     return;
   }
 
-  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp];
+  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp database:database];
   [[FIRFirestore firestore] getQueryNamed:name
                                completion:^(FIRQuery *query) {
                                  if (query == nil) {
@@ -99,6 +100,7 @@ RCT_EXPORT_METHOD(namedQueryOnSnapshot
 
 RCT_EXPORT_METHOD(collectionOnSnapshot
                   : (FIRApp *)firebaseApp
+                  : (NSString *)database
                   : (NSString *)path
                   : (NSString *)type
                   : (NSArray *)filters
@@ -110,7 +112,7 @@ RCT_EXPORT_METHOD(collectionOnSnapshot
     return;
   }
 
-  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp];
+  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp database:database];
   FIRQuery *query = [RNFBFirestoreCommon getQueryForFirestore:firestore path:path type:type];
 
   RNFBFirestoreQuery *firestoreQuery = [[RNFBFirestoreQuery alloc] initWithModifiers:firestore
@@ -134,6 +136,7 @@ RCT_EXPORT_METHOD(collectionOffSnapshot : (FIRApp *)firebaseApp : (nonnull NSNum
 
 RCT_EXPORT_METHOD(namedQueryGet
                   : (FIRApp *)firebaseApp
+                  : (NSString *)database
                   : (NSString *)name
                   : (NSString *)type
                   : (NSArray *)filters
@@ -142,7 +145,7 @@ RCT_EXPORT_METHOD(namedQueryGet
                   : (NSDictionary *)getOptions
                   : (RCTPromiseResolveBlock)resolve
                   : (RCTPromiseRejectBlock)reject) {
-  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp];
+  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp database:database];
   [[FIRFirestore firestore]
       getQueryNamed:name
          completion:^(FIRQuery *query) {
@@ -167,6 +170,7 @@ RCT_EXPORT_METHOD(namedQueryGet
 
 RCT_EXPORT_METHOD(collectionCount
                   : (FIRApp *)firebaseApp
+                  : (NSString *)database
                   : (NSString *)path
                   : (NSString *)type
                   : (NSArray *)filters
@@ -174,7 +178,7 @@ RCT_EXPORT_METHOD(collectionCount
                   : (NSDictionary *)options
                   : (RCTPromiseResolveBlock)resolve
                   : (RCTPromiseRejectBlock)reject) {
-  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp];
+  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp database:database];
   FIRQuery *query = [RNFBFirestoreCommon getQueryForFirestore:firestore path:path type:type];
   RNFBFirestoreQuery *firestoreQuery = [[RNFBFirestoreQuery alloc] initWithModifiers:firestore
                                                                                query:query
@@ -204,6 +208,7 @@ RCT_EXPORT_METHOD(collectionCount
 
 RCT_EXPORT_METHOD(collectionGet
                   : (FIRApp *)firebaseApp
+                  : (NSString *)database
                   : (NSString *)path
                   : (NSString *)type
                   : (NSArray *)filters
@@ -212,7 +217,7 @@ RCT_EXPORT_METHOD(collectionGet
                   : (NSDictionary *)getOptions
                   : (RCTPromiseResolveBlock)resolve
                   : (RCTPromiseRejectBlock)reject) {
-  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp];
+  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp database:database];
   FIRQuery *query = [RNFBFirestoreCommon getQueryForFirestore:firestore path:path type:type];
 
   RNFBFirestoreQuery *firestoreQuery = [[RNFBFirestoreQuery alloc] initWithModifiers:firestore

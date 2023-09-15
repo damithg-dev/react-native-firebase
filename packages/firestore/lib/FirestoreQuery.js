@@ -185,6 +185,7 @@ export default class FirestoreQuery {
     if (!isUndefined(this._queryName)) {
       return this._firestore.native
         .namedQueryGet(
+          this._firestore.database,
           this._queryName,
           this._modifiers.type,
           this._modifiers.filters,
@@ -199,6 +200,7 @@ export default class FirestoreQuery {
 
     return this._firestore.native
       .collectionGet(
+        this._firestore.database,
         this._collectionPath.relativeName,
         this._modifiers.type,
         this._modifiers.filters,
@@ -318,6 +320,7 @@ export default class FirestoreQuery {
 
     if (!isUndefined(this._queryName)) {
       this._firestore.native.namedQueryOnSnapshot(
+        this._firestore.database,
         this._queryName,
         this._modifiers.type,
         this._modifiers.filters,
@@ -328,6 +331,7 @@ export default class FirestoreQuery {
       );
     } else {
       this._firestore.native.collectionOnSnapshot(
+        this._firestore.database,
         this._collectionPath.relativeName,
         this._modifiers.type,
         this._modifiers.filters,

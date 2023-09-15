@@ -63,7 +63,7 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(documentOnSnapshot
                   : (FIRApp *)firebaseApp
-                  : (NSString *) database
+                  : (NSString *)database
                   : (NSString *)path
                   : (nonnull NSNumber *)listenerId
                   : (NSDictionary *)listenerOptions) {
@@ -110,11 +110,12 @@ RCT_EXPORT_METHOD(documentOffSnapshot : (FIRApp *)firebaseApp : (nonnull NSNumbe
 
 RCT_EXPORT_METHOD(documentGet
                   : (FIRApp *)firebaseApp
+                  : (NSString *)database
                   : (NSString *)path
                   : (NSDictionary *)getOptions
                   : (RCTPromiseResolveBlock)resolve
                   : (RCTPromiseRejectBlock)reject) {
-  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp];
+  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp database:database];
   FIRDocumentReference *documentReference = [RNFBFirestoreCommon getDocumentForFirestore:firestore
                                                                                     path:path];
 
@@ -150,10 +151,11 @@ RCT_EXPORT_METHOD(documentGet
 
 RCT_EXPORT_METHOD(documentDelete
                   : (FIRApp *)firebaseApp
+                  : (NSString *)database
                   : (NSString *)path
                   : (RCTPromiseResolveBlock)resolve
                   : (RCTPromiseRejectBlock)reject) {
-  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp];
+  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp database:database];
   FIRDocumentReference *documentReference = [RNFBFirestoreCommon getDocumentForFirestore:firestore
                                                                                     path:path];
 
@@ -168,12 +170,13 @@ RCT_EXPORT_METHOD(documentDelete
 
 RCT_EXPORT_METHOD(documentSet
                   : (FIRApp *)firebaseApp
+                  : (NSString *)database
                   : (NSString *)path
                   : (NSDictionary *)data
                   : (NSDictionary *)options
                   : (RCTPromiseResolveBlock)resolve
                   : (RCTPromiseRejectBlock)reject) {
-  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp];
+  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp database:database];
   FIRDocumentReference *documentReference = [RNFBFirestoreCommon getDocumentForFirestore:firestore
                                                                                     path:path];
 
@@ -200,11 +203,12 @@ RCT_EXPORT_METHOD(documentSet
 
 RCT_EXPORT_METHOD(documentUpdate
                   : (FIRApp *)firebaseApp
+                  : (NSString *)database
                   : (NSString *)path
                   : (NSDictionary *)data
                   : (RCTPromiseResolveBlock)resolve
                   : (RCTPromiseRejectBlock)reject) {
-  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp];
+  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp database:database];
   FIRDocumentReference *documentReference = [RNFBFirestoreCommon getDocumentForFirestore:firestore
                                                                                     path:path];
 
@@ -223,10 +227,11 @@ RCT_EXPORT_METHOD(documentUpdate
 
 RCT_EXPORT_METHOD(documentBatch
                   : (FIRApp *)firebaseApp
+                  : (NSString *)database
                   : (NSArray *)writes
                   : (RCTPromiseResolveBlock)resolve
                   : (RCTPromiseRejectBlock)reject) {
-  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp];
+  FIRFirestore *firestore = [RNFBFirestoreCommon getFirestoreForApp:firebaseApp database:database];
   FIRWriteBatch *batch = [firestore batch];
 
   for (NSDictionary *write in writes) {

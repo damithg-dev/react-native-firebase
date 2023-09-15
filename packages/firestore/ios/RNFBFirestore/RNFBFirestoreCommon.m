@@ -49,22 +49,22 @@ NSMutableDictionary *instanceCache;
   return instance;
 }
 
-+ (FIRFirestore *)getFirestoreForApp:(FIRApp *)app database: (NSString *)database {
-  if (instanceCache == nil) {
-    instanceCache = [[NSMutableDictionary alloc] init];
-  }
++ (FIRFirestore *)getFirestoreForApp:(FIRApp *)app database:(NSString *)database {
+  // if (instanceCache == nil) {
+  //   instanceCache = [[NSMutableDictionary alloc] init];
+  // }
 
-  FIRFirestore *cachedInstance = instanceCache[[app name]];
+  // FIRFirestore *cachedInstance = instanceCache[[app name]];
 
-  if (cachedInstance) {
-    return cachedInstance;
-  }
+  // if (cachedInstance) {
+  //   return cachedInstance;
+  // }
 
   FIRFirestore *instance = [FIRFirestore firestoreForApp:app database:database];
 
-  [self setFirestoreSettings:instance appName:[RNFBSharedUtils getAppJavaScriptName:app.name]];
+  // [self setFirestoreSettings:instance appName:[RNFBSharedUtils getAppJavaScriptName:app.name]];
 
-  instanceCache[[app name]] = instance;
+  // instanceCache[[app name]] = instance;
 
   return instance;
 }

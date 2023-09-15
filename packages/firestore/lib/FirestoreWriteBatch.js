@@ -41,7 +41,7 @@ export default class FirestoreWriteBatch {
     if (this._writes.length === 0) {
       return Promise.resolve();
     }
-    return this._firestore.native.documentBatch(this._writes);
+    return this._firestore.native.documentBatch(this._firestore.database, this._writes);
   }
 
   delete(documentRef) {

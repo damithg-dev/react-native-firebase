@@ -2358,7 +2358,7 @@ declare module '@react-native-firebase/app' {
       >;
     }
     interface FirebaseApp {
-      firestore(databaseID?: string): FirebaseFirestoreTypes.Module;
+      firestore(database?: string): FirebaseFirestoreTypes.Module;
     }
   }
 }

@@ -30,6 +30,7 @@ export class FirestoreAggregateQuery {
   get() {
     return this._firestore.native
       .collectionCount(
+        this._firestore.database,
         this._collectionPath.relativeName,
         this._modifiers.type,
         this._modifiers.filters,

@@ -81,7 +81,7 @@ export default class FirestoreDocumentReference {
   }
 
   delete() {
-    return this._firestore.native.documentDelete(this.path);
+    return this._firestore.native.documentDelete(this._firestore.database, this.path);
   }
 
   get(options) {
@@ -102,7 +102,7 @@ export default class FirestoreDocumentReference {
     }
 
     return this._firestore.native
-      .documentGet(this.path, options)
+      .documentGet(this._firestore.database, this.path, options)
       .then(data => new FirestoreDocumentSnapshot(this._firestore, data));
   }
 
@@ -168,7 +168,12 @@ export default class FirestoreDocumentReference {
       this._firestore.native.documentOffSnapshot(listenerId);
     };
 
-    this._firestore.native.documentOnSnapshot(this.path, listenerId, snapshotListenOptions);
+    this._firestore.native.documentOnSnapshot(
+      this._firestore.database,
+      this.path,
+      listenerId,
+      snapshotListenOptions,
+    );
 
     return unsubscribe;
   }
@@ -186,6 +191,7 @@ export default class FirestoreDocumentReference {
     }
 
     return this._firestore.native.documentSet(
+      this._firestore.database,
       this.path,
       buildNativeMap(data, this._firestore._settings.ignoreUndefinedProperties),
       setOptions,
@@ -207,6 +213,7 @@ export default class FirestoreDocumentReference {
     }
 
     return this._firestore.native.documentUpdate(
+      this._firestore.database,
       this.path,
       buildNativeMap(data, this._firestore._settings.ignoreUndefinedProperties),
     );

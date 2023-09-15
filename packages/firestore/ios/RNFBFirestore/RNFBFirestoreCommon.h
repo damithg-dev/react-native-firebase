@@ -25,7 +25,7 @@
 
 + (FIRFirestore *)getFirestoreForApp:(FIRApp *)firebaseApp;
 
-+ (FIRFirestore *)getFirestoreForApp:(FIRApp *)firebaseApp database: (NSString *)database;
++ (FIRFirestore *)getFirestoreForApp:(FIRApp *)firebaseApp database:(NSString *)database;
 
 + (void)setFirestoreSettings:(FIRFirestore *)firestore appName:(NSString *)appName;
 
